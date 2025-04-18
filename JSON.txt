@@ -1,0 +1,6 @@
+{
+    "name": "ivan",
+    "email": "ivan@ivan.ru",
+    "password": "moredock1",
+    "password_confirmation": "moredock1"
+}
