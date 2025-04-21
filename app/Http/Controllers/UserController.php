@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     use \App\UserTrait;
     use \App\ApiHelper;
-    
+
     /**
      * Вывод всех пользователей
      * @return UserCollection
@@ -37,19 +37,19 @@ class UserController extends Controller
         return new UserCollection($users);
     }
 
-    
+
     protected $rules = [
-            "name" => 'required',
-            'login' => 'required|unique:users,login',
-            'password' => 'required|string|min:8|confirmed'
+        "name" => 'required',
+        'login' => 'required|unique:users,login',
+        'password' => 'required|string|min:8|confirmed'
     ];
 
-    
-    protected  $message = [
-            'unique' => 'Такой логин уже существует!',
-            // 'string' => "Поле :attribute должно быть строкой",
-            'password.min' => "Пароль должен быть минимум 8 символов",
-            'password.confirmed' => "Пароли должны совпадать"
+
+    protected $message = [
+        'unique' => 'Такой логин уже существует!',
+        // 'string' => "Поле :attribute должно быть строкой",
+        'password.min' => "Пароль должен быть минимум 8 символов",
+        'password.confirmed' => "Пароли должны совпадать"
     ];
 
     /**

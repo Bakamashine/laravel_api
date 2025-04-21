@@ -6,6 +6,7 @@ use App\Models\WorkShift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\ApiHelper;
 
 
 Route::get('/user', function (Request $request) {
@@ -13,16 +14,20 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::controller(UserController::class)
-    ->group(function () {
+// Route::controller(UserController::class)
+//     ->group(function () {
 
-        Route::middleware('guest:sanctum')
-            ->group(function () {
-                // Route::post("/register", 'register');
+//         Route::middleware('guest:sanctum')
+//             ->group(function () {
+//             });
+//     });
 
-                // Route::post("/login", 'login');
-            });
-    });
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken($request->token_name);
+
+    return ['token' => $token->plainTextToken];
+});
+
 
 
 Route::get("test", function () {
@@ -32,16 +37,16 @@ Route::get("test", function () {
 // Route::post("/logout", [UserController::class, 'logout'])->middleware("auth:sanctum");
 
 // Administrator
-Route::controller(AdminController::class)
-    ->group(function () {
-        Route::get("/user", 'show');
-        Route::get("/user/{id}", 'detail');
-        Route::post("/user", 'CreateNewUser');
-    });
-Route::controller(WorkShiftController::class)
-    ->group(function () {
-        Route::post('work-shift', 'create');
-        Route::patch('work-shift/{id}/open', 'open');
-        Route::patch('work-shift/{id}/close', 'close');
-        Route::post('work-shift/{id}/user', 'addUser');
-    });
+// Route::controller(AdminController::class)
+//     ->group(function () {
+//         Route::get("/user", 'show');
+//         Route::get("/user/{id}", 'detail');
+//         Route::post("/user", 'CreateNewUser');
+//     });
+// Route::controller(WorkShiftController::class)
+//     ->group(function () {
+//         Route::post('work-shift', 'create');
+//         Route::patch('work-shift/{id}/open', 'open');
+//         Route::patch('work-shift/{id}/close', 'close');
+//         Route::post('work-shift/{id}/user', 'addUser');
+//     });
