@@ -21,7 +21,13 @@ class WorkShiftController extends Controller
     protected $message = [
         "date_format" => "Поле :attribute должно быть по формату Y-m-d H:i"
     ];
-    public function create(Request $request)
+
+    /**
+     * Создание смены
+     * @param \Illuminate\Http\Request $request
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function __invoke(Request $request)
     {
 
         try {
@@ -40,6 +46,11 @@ class WorkShiftController extends Controller
         }
     }
 
+    /**
+     * Открытие смены
+     * @param \App\Models\WorkShift $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function open(WorkShift $id)
     {
         $active = 1;
@@ -54,6 +65,11 @@ class WorkShiftController extends Controller
         return $this->OutputWorkShift($id);
     }
 
+    /**
+     * Вывод данных смены по ID
+     * @param mixed $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     protected function OutputWorkShift($id)
     {
         return $this->data([
@@ -61,8 +77,14 @@ class WorkShiftController extends Controller
             "start" => $id->start,
             "end" => $id->end,
             "active" => $id->active ? true : false
-        ]);
+        ], 200);
     }
+
+    /**
+     * Закрытие смены
+     * @param \App\Models\WorkShift $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function close(WorkShift $id)
     {
         $close = 0;
@@ -78,7 +100,7 @@ class WorkShiftController extends Controller
     {
         try {
             Validator::make($request->all(), ['user_id' => "required|numeric"])->validate();
-            echo "Пока в разработке";
+            dd("Пока в разработке");
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }
