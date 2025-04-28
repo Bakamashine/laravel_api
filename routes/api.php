@@ -10,15 +10,15 @@ use App\ApiHelper;
 // use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 
 // Получение информации о пользователе
 Route::get("/users/getinfo", function (Request $request) {
     return auth('sanctum')->user();
-})->middleware("sanctum:auth");
+})->middleware("auth:sanctum");
 
 
 
@@ -28,6 +28,7 @@ Route::get("test", function () {
 
 // Администратор
 Route::controller(AdminController::class)
+    ->middleware(['auth:sanctum', 'abilities:administrator'])
     ->group(function () {
         Route::get("/user", 'show');
         Route::get("/user/{id}", 'detail');

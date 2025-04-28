@@ -13,33 +13,34 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends UserController
 {
+    
     /**
      * Авторизация посредством API
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
-    {
+    public function __invoke(Request $request) {
         try {
             $user = User::where('login', $request->login)->first();
             if (!$user || !Hash::make($request->password) == $user->password) {
                 throw ValidationException::withMessages(['login' => 'Такого пользователя не существует']);
             }
-            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token")->plainTextToken]);
+                return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token")->plainTextToken]);
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }
     }
 
-    public function logout(Request $request)
-    {
-        try {
-            $user = Auth::user();
-            if ($user) {
-                $user->currentAccessToken()->delete();
-            }
-        } catch (\Exception $e) {
-            return $this->codeAndMessage($e->getMessage(), 500);
-        }
-    }
+//     public function logout(Request $request)
+//     {
+//         try {
+//             $user = Auth::user();
+//             if ($user) {
+//                 $user->currentAccessToken()->delete();
+//             }
+//         } catch (\Exception $e) {
+//             return $this->codeAndMessage($e->getMessage(), 500);
+//         }
+//     }
+
 }

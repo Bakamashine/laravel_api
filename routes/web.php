@@ -8,6 +8,6 @@ use App\Http\Controllers\AuthController;
 
 Route::middleware('guest')
     ->group(function () {
-        Route::post("/register", [RegisterController::class, 'register']);
-        Route::post('/login', [AuthController::class, 'login']);
+        Route::post("/register", RegisterController::class);
+        Route::post('/login', AuthController::class);
     });

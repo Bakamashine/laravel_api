@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create("role", function (Blueprint $blueprint) {
             $blueprint->id();
             $blueprint->string("role_name");
+            // $blueprint->string("abilities");
         });
 
 
@@ -56,6 +57,6 @@ return new class extends Migration {
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
-        Schema::dropIfExists("roles");
+        Schema::dropIfExists("role");
     }
 };

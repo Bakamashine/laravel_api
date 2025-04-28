@@ -17,7 +17,7 @@ class RegisterController extends UserController
      * @param \Illuminate\Http\Request $request
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function __invoke(Request $request)
     {
         try {
             Validator::make($request->all(), $this->rules, $this->message)->validate();

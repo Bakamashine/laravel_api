@@ -17,9 +17,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("role")->insert([["id" => 1, "role_name" => "Администратор"], ["id" => 2, "role_name" => "Официант"], ["id" => 3, "role_name" => "Повара"]]);
+        DB::table("role")->insert(
+            [
+                ["id" => 1, "role_name" => "Администратор",],
+                ["id" => 2, "role_name" => "Официант",],
+                ["id" => 3, "role_name" => "Повара",]
+            ]
+        );
         User::create(["name" => "admin", "role_id" => 1, "login" => "admin@admin.ru", "password" => Hash::make("admin")]);
         User::factory()->count(20)->create();
-        // UserFactory::
     }
 }
