@@ -27,17 +27,19 @@ Route::get("test", function () {
 })->middleware("auth:sanctum");
 
 // Администратор
-Route::controller(AdminController::class)
-    ->middleware(['auth:sanctum', 'abilities:1'])
+Route::middleware(['auth:sanctum', 'abilities:1'])
     ->group(function () {
-        Route::get("/user", 'show');
-        Route::get("/user/{id}", 'detail');
-        Route::post("/user", 'CreateNewUser');
-    });
-Route::controller(WorkShiftController::class)
-    ->group(function () {
-        Route::post('work-shift', 'create');
-        Route::patch('work-shift/{id}/open', 'open');
-        Route::patch('work-shift/{id}/close', 'close');
-        Route::post('work-shift/{id}/user', 'addUser');
+        Route::controller(AdminController::class)
+            ->group(function () {
+                Route::get("/user", 'show');
+                Route::get("/user/{id}", 'detail');
+                Route::post("/user", 'CreateNewUser');
+            });
+        Route::controller(WorkShiftController::class)
+            ->group(function () {
+                Route::post('work-shift', 'create');
+                Route::patch('work-shift/{id}/open', 'open');
+                Route::patch('work-shift/{id}/close', 'close');
+                Route::post('work-shift/{id}/user', 'addUser');
+            });
     });
