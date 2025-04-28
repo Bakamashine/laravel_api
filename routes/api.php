@@ -28,7 +28,7 @@ Route::get("test", function () {
 
 // Администратор
 Route::controller(AdminController::class)
-    ->middleware(['auth:sanctum', 'abilities:administrator'])
+    ->middleware(['auth:sanctum', 'abilities:1'])
     ->group(function () {
         Route::get("/user", 'show');
         Route::get("/user/{id}", 'detail');

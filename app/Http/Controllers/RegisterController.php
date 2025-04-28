@@ -21,6 +21,9 @@ class RegisterController extends UserController
     {
         try {
             Validator::make($request->all(), $this->rules, $this->message)->validate();
+            /**
+             * @var User
+             */
             $user = User::create([
                 'name' => $request->name,
                 'surname' => $request->surname,
@@ -31,7 +34,7 @@ class RegisterController extends UserController
                 'status' => $request->status,
                 'password' => Hash::make($request->password),
             ]);
-            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token")->plainTextToken]);
+            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", ["$user->role_id"])->plainTextToken]);
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }

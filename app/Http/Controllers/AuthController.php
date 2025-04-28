@@ -25,7 +25,7 @@ class AuthController extends UserController
             if (!$user || !Hash::make($request->password) == $user->password) {
                 throw ValidationException::withMessages(['login' => 'Такого пользователя не существует']);
             }
-                return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token")->plainTextToken]);
+                return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", ["$user->role_id"])->plainTextToken]);
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }
