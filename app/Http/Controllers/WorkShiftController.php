@@ -102,7 +102,7 @@ class WorkShiftController extends Controller
         try {
             Validator::make(
                 $request->all(),
-                ['user_id' => ['required', 'numeric', 'unique:' . WorkShift::getTable()]]
+                ['user_id' => ['required', 'numeric', 'unique:' . WorkShift::class]]
             )
                 ->validate();
             dd("Пока в разработке");
