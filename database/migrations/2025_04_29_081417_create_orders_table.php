@@ -20,7 +20,8 @@ return new class extends Migration {
             $table->foreignId("table_id")
                 ->constrained("tables")
                 ->cascadeOnDelete();
-            $table->string("status");
+            $table->string("status")->default("Принят");
+            $table->integer("price");
         });
     }
 

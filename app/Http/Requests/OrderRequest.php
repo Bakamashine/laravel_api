@@ -47,7 +47,8 @@ class OrderRequest extends FormRequest
                 }
             ],
             'table_id' => ['required', 'numeric', 'exists:tables,id'],
-            'number_of_person' => ['numeric', 'sometimes']
+            'number_of_person' => ['numeric', 'sometimes'],
+            'status' => ['sometimes']
         ];
     }
 
