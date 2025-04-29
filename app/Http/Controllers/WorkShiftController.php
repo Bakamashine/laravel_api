@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Models\WorkShift;
+use Illuminate\Validation\Rule;
 use Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\WorkShiftUser;
@@ -96,17 +98,32 @@ class WorkShiftController extends Controller
 
     }
 
+    /**
+     * Добавление сотрудников на смену
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function addUser(Request $request, $id)
     {
         try {
             Validator::make(
                 $request->all(),
-                ['user_id' => ['required', 'numeric', 'unique:work_shift_users,user_id,'. $request->user_id]],
+                [
+                    'user_id' => [
+                        'required',
+                        'numeric',
+                        Rule::unique('work_shift_users')->where(
+                            function (Builder $query) use ($id) {
+                                return $query->where("work_shift_id", $id);
+                            }
+                        ),
+                    ]
+                ],
                 ['unique' => "Forbidden. The worker is already on shift!"]
             )
                 ->validate();
-            $work_shift = WorkShiftUser::create($request->only('user_id'));
-            // $work_shift = new WorkShiftUser(['user_id' => $request->user_id]);
+            $work_shift = WorkShiftUser::create(['user_id' => $request->user_id, 'work_shift_id' => $id]);
             return $this->data(
                 [
                     "id_user" => $work_shift->user_id,
