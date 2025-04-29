@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\WorkShiftUser;
 
 class Order extends Model
 {
     protected $fillable = [
         "count",
         "work_shift_users_id",
-        "table_id"
+        "table_id",
+        "status"
     ];
 
     protected $hidden = [

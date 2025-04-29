@@ -26,7 +26,7 @@ class OrderRequest extends FormRequest
             'work_shift_id' => [
                 'required', 
                 'numeric', 
-                'exists:work_shifts_id,id',
+                'exists:work_shifts,id',
                 function (string $attribute, mixed $value, \Closure $fail) {
                     $record = WorkShift::find($value);
                     if (!$record || !$record->active) {
@@ -45,4 +45,5 @@ class OrderRequest extends FormRequest
             'table_id.exists' => "Такого столика не существует!"
         ];
     }
+    
 }

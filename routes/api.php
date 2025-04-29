@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkShiftController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,18 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
                 Route::patch('work-shift/{id}/close', 'close');
                 Route::post('work-shift/{id}/user', 'addUser');
             });
+    });
+
+// Официант
+// Route::middleware(['auth:sanctum'])
+// ->group(function () {
+//         Route::controller(OrderController::class)
+//         ->group(function () {
+//             Route::post("/order", '__invoke');
+//         });
+// });
+
+Route::controller(OrderController::class)
+    ->group(function () {
+        Route::post("/order", '__invoke');
     });
