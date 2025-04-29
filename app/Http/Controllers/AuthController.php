@@ -31,16 +31,16 @@ class AuthController extends UserController
         }
     }
 
-//     public function logout(Request $request)
-//     {
-//         try {
-//             $user = Auth::user();
-//             if ($user) {
-//                 $user->currentAccessToken()->delete();
-//             }
-//         } catch (\Exception $e) {
-//             return $this->codeAndMessage($e->getMessage(), 500);
-//         }
-//     }
+    public function logout(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            if ($user) {
+                $user->currentAccessToken()->delete();
+            }
+        } catch (\Exception $e) {
+            return $this->codeAndMessage($e->getMessage(), 500);
+        }
+    }
 
 }
