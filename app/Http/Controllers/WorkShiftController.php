@@ -100,6 +100,7 @@ class WorkShiftController extends Controller
 
     /**
      * Добавление сотрудников на смену
+     * FIXME: Надо добавить проверку смены
      * @param \Illuminate\Http\Request $request
      * @param mixed $id
      * @return mixed|\Illuminate\Http\JsonResponse
@@ -119,16 +120,16 @@ class WorkShiftController extends Controller
                             }
                         ),
                     ],
-                    "work_shift_id" => [
-                        'exists:work_shifts,id'
-                    ]
                 ],
                 [
                     'unique' => "Forbidden. The worker is already on shift!",
-                    'exists' => "Такой смены не существует"
                 ]
             )
                 ->validate();
+            $check = WorkShift::find($id);
+            if (!$check) {
+                return $this->Forbidden("Такой смены не существует");
+            }
             $work_shift = WorkShiftUser::create(['user_id' => $request->user_id, 'work_shift_id' => $id]);
             return $this->data(
                 [
