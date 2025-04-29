@@ -36,4 +36,8 @@ class WorkShift extends Model
         "end",
         "active"
     ];
+    
+    public function workshiftuser() {
+        return $this->hasMany(WorkShiftUser::class);
+    }
 }

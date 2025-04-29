@@ -104,7 +104,16 @@ class WorkShiftController extends Controller
                 ['user_id' => ['required', 'numeric', 'unique:' . WorkShift::class]]
             )
                 ->validate();
-            dd("Пока в разработке");
+            // $work_shift = WorkShiftUser::create($request->only('user_id'));
+            $work_shift = new WorkShiftUser($request->all());
+            return $this->data(
+                [
+                    "id_user" => $work_shift->user_id,
+                    "status" => "added"
+                ],
+                200
+            );
+
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }

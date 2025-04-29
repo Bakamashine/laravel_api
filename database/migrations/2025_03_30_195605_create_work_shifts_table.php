@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date("start");
             $table->date("end");
             $table->boolean("active")->default(0);
-            $table->json("users_id")->nullable();
         });
     }
 

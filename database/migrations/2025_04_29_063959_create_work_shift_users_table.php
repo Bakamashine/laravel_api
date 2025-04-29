@@ -18,6 +18,7 @@ return new class extends Migration
             ->cascadeOnDelete()
             ->unique()
             ->nullable();
+            $table->foreignId("work_shift_id")->constrained("work_shifts")->cascadeOnDelete()->nullable();
         });
     }
 
