@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\WorkShift;
 use Validator;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 class WorkShiftController extends Controller
 {
@@ -96,10 +97,14 @@ class WorkShiftController extends Controller
 
     }
 
-    public function addUser(Request $request, WorkShift $id)
+    public function addUser(Request $request)
     {
         try {
-            Validator::make($request->all(), ['user_id' => "required|numeric"])->validate();
+            Validator::make(
+                $request->all(),
+                ['user_id' => ['required', 'numeric', 'unique:' . WorkShift::getTable()]]
+            )
+                ->validate();
             dd("Пока в разработке");
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
