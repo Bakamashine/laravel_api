@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Http\Request;
 use App\Models\WorkShift;
 use Validator;
 use Illuminate\Validation\ValidationException;
-use App\Models\User;
+use App\Models\WorkShiftUser;
 
 class WorkShiftController extends Controller
 {

@@ -2,11 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WorkShiftController;
-use App\Models\WorkShift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\ApiHelper;
 
 // Получение информации о пользователе
 Route::get("/users/getinfo", function (Request $request) {
