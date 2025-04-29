@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             TableSeeder::class,
             WorkShiftSeeder::class,
             WorkShiftUserSeeder::class,
-            OrderSeeder::class
+            OrderSeeder::class,
+            PositionSeeder::class
         ]);
     }
 }

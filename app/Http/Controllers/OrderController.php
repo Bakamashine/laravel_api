@@ -17,7 +17,8 @@ class OrderController extends Controller
      * @param \App\Http\Requests\OrderRequest $request
      * @return void
      */
-    public function __invoke(OrderRequest $request) {
+    public function __invoke(OrderRequest $request)
+    {
         $validated = $request->validated();
 
         $user_id = auth('sanctum')->id();
@@ -25,13 +26,13 @@ class OrderController extends Controller
         if (!$record) {
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
-        
+
         $order = Order::create([
             'count' => $request->count,
-            'work_shift_users_id'  => $user_id,
+            'work_shift_users_id' => $user_id,
             'table_id' => $request->table_id,
         ]);
-        
+
         if ($order) {
             return $this->data([
                 "id" => $order->id,
@@ -43,8 +44,18 @@ class OrderController extends Controller
             ]);
         }
     }
-    
-    public function getForId(Order $id) {
-        return new OrderResource($id);        
+
+    /**
+     * Получение заказа по id
+     * @param \App\Models\Order $id
+     * @return mixed|OrderResource|\Illuminate\Http\JsonResponse
+     */
+    public function getForId(Order $id)
+    {
+        if ($id->workshiftuser->users->id == auth('sanctum')->user()->id) {
+            return new OrderResource($id);
+        } else {
+            return $this->Forbidden("Forbidden. You did not accept this order!");
+        }
     }
 }
