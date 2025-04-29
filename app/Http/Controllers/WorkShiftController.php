@@ -118,9 +118,15 @@ class WorkShiftController extends Controller
                                 return $query->where("work_shift_id", $id);
                             }
                         ),
+                    ],
+                    "work_shift_id" => [
+                        'exists:work_shifts,id'
                     ]
                 ],
-                ['unique' => "Forbidden. The worker is already on shift!"]
+                [
+                    'unique' => "Forbidden. The worker is already on shift!",
+                    'exists' => "Такой смены не существует"
+                ]
             )
                 ->validate();
             $work_shift = WorkShiftUser::create(['user_id' => $request->user_id, 'work_shift_id' => $id]);
