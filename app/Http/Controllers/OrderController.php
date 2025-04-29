@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
@@ -41,5 +42,9 @@ class OrderController extends Controller
                 "price" => 0
             ]);
         }
+    }
+    
+    public function getForId(Order $id) {
+        return new OrderResource($id);        
     }
 }

@@ -17,7 +17,7 @@ class Order extends Model
         "updated_at"
     ];
     
-    public function workshiftusers() {
+    public function workshiftuser() {
         return $this->belongsTo(WorkShiftUser::class);
     }
     

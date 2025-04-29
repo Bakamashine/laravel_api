@@ -13,6 +13,6 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        Order::create(['count' => 2, 'work_shift_users_id' => 2, 'table_id' => 2]);
+        Order::create(['count' => 2, 'work_shift_user_id' => 1, 'table_id' => 2]);
     }
 }

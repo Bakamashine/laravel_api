@@ -42,4 +42,5 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
 Route::controller(OrderController::class)
     ->group(function () {
         Route::post("/order", '__invoke');
+        Route::get("/order/{id}", 'getForId');
     });

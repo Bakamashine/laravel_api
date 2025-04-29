@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->integer("count")->nullable();
-            $table->foreignId("work_shift_users_id")
+            $table->foreignId("work_shift_user_id")
                 ->constrained("work_shift_users")
                 ->cascadeOnDelete();
             $table->foreignId("table_id")

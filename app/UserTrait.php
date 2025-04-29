@@ -10,6 +10,7 @@ trait UserTrait
      */
     function all()
     {
-        return User::select()->leftJoin("role", "users.role_id", '=', "role.id");
+        return User::select()
+            ->leftJoin("role", "users.role_id", '=', "role.id");
     }
 }
