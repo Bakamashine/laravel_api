@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $start
  * @property string $end
  * @property int $active
- * @property string|null $users_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkShiftUser> $workshiftuser
+ * @property-read int|null $workshiftuser_count
  * @method static \Database\Factories\WorkShiftFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift newQuery()
@@ -21,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift whereEnd($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift whereStart($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShift whereUsersId($value)
  * @mixin \Eloquent
  */
 class WorkShift extends Model

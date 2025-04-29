@@ -5,6 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $work_shift_id
+ * @property-read User|null $users
+ * @property-read \App\Models\WorkShift|null $workShift
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkShiftUser whereWorkShiftId($value)
+ * @mixin \Eloquent
+ */
 class WorkShiftUser extends Model
 {
     public $timestamps = false;
