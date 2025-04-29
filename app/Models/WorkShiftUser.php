@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
 /**
  * 
@@ -24,17 +23,25 @@ use App\Models\User;
 class WorkShiftUser extends Model
 {
     public $timestamps = false;
-    
+
     protected $fillable = [
         'user_id',
         'work_shift_id'
     ];
 
-    public function users() {
+    public function users()
+    {
         return $this->belongsTo(User::class);
     }
-    
-    public function workShift() {
+
+    public function workShift()
+    {
         return $this->belongsTo(WorkShift::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    
 }

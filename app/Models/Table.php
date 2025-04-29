@@ -23,4 +23,8 @@ class Table extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     public $timestamps = false;
+    
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
 }
