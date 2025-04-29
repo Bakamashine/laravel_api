@@ -42,7 +42,7 @@ class OrderRequest extends FormRequest
     public function messages() {
         return [
             'work_shift_id.exists' => "Такой смены не существует!",
-            'table_id' => "Такого столика не существует!"
+            'table_id.exists' => "Такого столика не существует!"
         ];
     }
 }

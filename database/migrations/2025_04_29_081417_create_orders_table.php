@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->foreignId("table_id")
                 ->constrained("tables")
                 ->cascadeOnDelete();
+            $table->string("status");
         });
     }
 
