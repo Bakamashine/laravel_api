@@ -37,6 +37,8 @@ class AuthController extends UserController
             $user = Auth::user();
             if ($user) {
                 $user->currentAccessToken()->delete();
+            } else {
+                return $this->codeAndMessage("Вы не авторизированы");
             }
         } catch (\Exception $e) {
             return $this->codeAndMessage($e->getMessage(), 500);

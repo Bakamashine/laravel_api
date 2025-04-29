@@ -22,6 +22,12 @@ trait ApiHelper
         ], $code);
     }
     
+    /**
+     * Текст и код
+     * @param mixed $message
+     * @param mixed $code
+     * @return JsonResponse|mixed
+     */
     function codeAndMessage($message = '', $code = 200) {
         return response()->json([
             "code" => $code,
@@ -29,6 +35,12 @@ trait ApiHelper
         ], $code);
     }
     
+    /**
+     * Обёртка data
+     * @param mixed $data
+     * @param mixed $code
+     * @return JsonResponse|mixed
+     */
     function data($data, $code = 201) {
         return response()->json([
             "data" => $data
