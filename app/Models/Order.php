@@ -18,7 +18,7 @@ class Order extends Model
     ];
     
     public function workshiftuser() {
-        return $this->belongsTo(WorkShiftUser::class);
+        return $this->belongsTo(WorkShiftUser::class, 'work_shift_user_id', 'id');
     }
     
     public function table() {
