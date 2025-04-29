@@ -8,6 +8,8 @@ use App\Models\Table;
 
 class TableSeeder extends Seeder
 {
+    
+    use WithoutModelEvents;
     /**
      * Run the database seeds.
      */
