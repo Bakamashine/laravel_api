@@ -62,10 +62,10 @@ trait ApiHelper
      * Недостаток прав
      * @return JsonResponse|mixed
      */
-    function Forbidden()
+    function Forbidden(string $message = "Forbidden for you")
     {
         $code = 403;
-        return $this->Error(["code" => $code, "message" => "Forbidden for you"], $code);
+        return $this->Error(["code" => $code, "message" => $message], $code);
     }
 
     /**

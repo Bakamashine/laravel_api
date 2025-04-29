@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('work_shift_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")
-                ->constrained("users")
-                ->cascadeOnDelete()
+                ->nullable()
                 ->unique()
-                ->nullable();
+                ->constrained("users")
+                ->cascadeOnDelete();
             $table->foreignId("work_shift_id")->nullable()->constrained("work_shifts")->cascadeOnDelete();
         });
     }

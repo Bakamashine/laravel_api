@@ -96,12 +96,13 @@ class WorkShiftController extends Controller
 
     }
 
-    public function addUser(Request $request)
+    public function addUser(Request $request, $id)
     {
         try {
             Validator::make(
                 $request->all(),
-                ['user_id' => ['required', 'numeric', 'unique:' . WorkShift::class]]
+                ['user_id' => ['required', 'numeric', 'unique:work_shift_users,user_id,'. $request->user_id]],
+                ['unique' => "Forbidden. The worker is already on shift!"]
             )
                 ->validate();
             $work_shift = WorkShiftUser::create($request->only('user_id'));
@@ -115,6 +116,9 @@ class WorkShiftController extends Controller
             );
 
         } catch (ValidationException $e) {
+            if ($e->validator->errors()->has('user_id')) {
+                return $this->Forbidden($e->validator->errors()->first("user_id"));
+            }
             return $this->ValidateError($e->validator->errors()->all());
         }
     }
