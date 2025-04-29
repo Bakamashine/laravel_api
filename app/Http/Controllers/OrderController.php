@@ -25,7 +25,6 @@ class OrderController extends Controller
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
         
-        // TODO: После миграции, следует убрать status
         $order = Order::create([
             'count' => $request->count,
             'work_shift_users_id'  => $user_id,
@@ -35,11 +34,11 @@ class OrderController extends Controller
         if ($order) {
             return $this->data([
                 "id" => $order->id,
-                "table" => $order->tables->name,
+                "table" => $order->table->name,
                 "shift_workers" => auth('sanctum')->user()->name,
                 'created_at' => $order->created_at,
-                "status" => $order->status,
-                "price" => $order->price
+                "status" => "Принят",
+                "price" => 0
             ]);
         }
     }
