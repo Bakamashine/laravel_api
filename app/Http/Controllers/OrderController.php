@@ -19,17 +19,19 @@ class OrderController extends Controller
      */
     public function __invoke(OrderRequest $request)
     {
-        $validated = $request->validated();
+        $request->validated();
 
         $user_id = auth('sanctum')->id();
-        $record = WorkShiftuser::where("id", $request->work_shift_id)->where("user_id", $user_id)->first();
+        $record = WorkShiftuser::where("id", $request->work_shift_id)
+            ->where("user_id", $user_id)
+            ->first();
         if (!$record) {
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
-
+        
         $order = Order::create([
             'count' => $request->count,
-            'work_shift_users_id' => $user_id,
+            'work_shift_user_id' => $user_id,
             'table_id' => $request->table_id,
         ]);
 

@@ -36,7 +36,7 @@ class Order extends Model
 {
     protected $fillable = [
         "count",
-        "work_shift_users_id",
+        "work_shift_user_id",
         "table_id",
         "status"
     ];
