@@ -21,7 +21,7 @@ return new class extends Migration {
                 ->constrained("tables")
                 ->cascadeOnDelete();
             $table->string("status")->default("Принят");
-            $table->integer("price")->default(0);
+            // $table->integer("price")->default(0);
         });
     }
 

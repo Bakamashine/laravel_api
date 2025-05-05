@@ -18,10 +18,11 @@ class OrderResource extends JsonResource
         return [
             "id" => $this->id,
             "table" => $this->table->name,
-            "shift_workers" => $this->workshiftuser->users->name,
+            "shift_workers" => $this->workshiftuser->user->name,
             "created_at" => $this->created_at,
             "status" => $this->status,
-            "positions" => $this->position
+            "positions" => $this->position,
+            'price_all' => $this->position->sum('price')
         ];
     }
 }

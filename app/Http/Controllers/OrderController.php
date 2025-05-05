@@ -54,7 +54,7 @@ class OrderController extends Controller
      */
     public function getForId(Order $id)
     {
-        if ($id->workshiftuser->users->id == auth('sanctum')->user()->id) {
+        if ($id->workshiftuser->user->id == auth('sanctum')->user()->id) {
             $res =  new OrderResource($id);
             return $res 
             ? $res
