@@ -13,7 +13,7 @@ trait ApiHelper
      * @param int $code
      * @return JsonResponse|mixed
      */
-    function isSuccess($data, string $message = '', int $code = 200)
+    public function isSuccess($data, string $message = '', int $code = 200)
     {
         return response()->json([
             "status" => $code,
@@ -28,7 +28,7 @@ trait ApiHelper
      * @param mixed $code
      * @return JsonResponse|mixed
      */
-    function codeAndMessage($message = '', $code = 200) {
+    public function codeAndMessage($message = '', $code = 200) {
         return response()->json([
             "code" => $code,
             "message" => $message,
@@ -41,7 +41,7 @@ trait ApiHelper
      * @param mixed $code
      * @return JsonResponse|mixed
      */
-    function data($data, $code = 201) {
+    public function data($data, $code = 201) {
         return response()->json([
             "data" => $data
         ], $code);
@@ -52,7 +52,7 @@ trait ApiHelper
      * @param mixed $data
      * @return JsonResponse|mixed
      */
-    function Error($data, $code=200)
+    public function Error($data, $code=500)
     {
         return response()->json(["error" => $data], $code);
     }
@@ -61,7 +61,7 @@ trait ApiHelper
      * Ошибка авторизации
      * @return void
      */
-    function LoginFailed()
+    public function LoginFailed()
     {
         $code = 403;
         $this->Error([
@@ -74,7 +74,7 @@ trait ApiHelper
      * Недостаток прав
      * @return JsonResponse|mixed
      */
-    function Forbidden(string $message = "Forbidden for you")
+    public function Forbidden(string $message = "Forbidden for you")
     {
         $code = 403;
         return $this->Error(["code" => $code, "message" => $message], $code);
@@ -87,12 +87,18 @@ trait ApiHelper
      * @param mixed $code
      * @return JsonResponse|mixed
      */
-    function ValidateError($data, string $message = 'Validation Error', $code = 422)
+    public function ValidateError($data, string $message = 'Validation Error', $code = 422)
     {
         return $this->Error([
             "code" => $code,
             "message" => $message,
             "errors" => $data
         ], $code);
+    }
+    
+    public function NotFound() {
+        return $this->Error([
+            "message" => "Not Found"
+        ], 404);
     }
 }

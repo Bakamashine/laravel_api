@@ -55,7 +55,10 @@ class OrderController extends Controller
     public function getForId(Order $id)
     {
         if ($id->workshiftuser->users->id == auth('sanctum')->user()->id) {
-            return new OrderResource($id);
+            $res =  new OrderResource($id);
+            return $res 
+            ? $res
+            : $this->NotFound();
         } else {
             return $this->Forbidden("Forbidden. You did not accept this order!");
         }

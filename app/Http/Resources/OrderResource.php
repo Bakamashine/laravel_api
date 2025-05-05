@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             "shift_workers" => $this->workshiftuser->users->name,
             "created_at" => $this->created_at,
             "status" => $this->status,
+            "positions" => $this->position
         ];
     }
 }
