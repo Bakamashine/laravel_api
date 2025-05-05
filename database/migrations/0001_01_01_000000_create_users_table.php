@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("role", function (Blueprint $blueprint) {
+        Schema::create("roles", function (Blueprint $blueprint) {
             $blueprint->id();
             $blueprint->string("role_name");
-            // $blueprint->string("abilities");
+            $blueprint->string("abilities")->nullable();
         });
 
 
