@@ -23,10 +23,10 @@ class AuthController extends UserController
     {
         try {
             $user = User::where('login', $request->login)->first();
-            if (!$user || !Hash::make($request->password) == $user->password) {
+            if (!$user || !Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages(['login' => 'Такого пользователя не существует']);
             } else {
-                return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", ["$user->role_id"])->plainTextToken]);
+                return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", json_decode($user->role->abilities))->plainTextToken]);
             }
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());

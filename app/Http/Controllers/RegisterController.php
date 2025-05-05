@@ -34,7 +34,7 @@ class RegisterController extends UserController
                 'status' => $request->status,
                 'password' => Hash::make($request->password),
             ]);
-            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", ["$user->role_id"])->plainTextToken]);
+            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", json_decode($user->role()->abilities))->plainTextToken]);
         } catch (ValidationException $e) {
             return $this->ValidateError($e->validator->errors()->all());
         }
