@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Table newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Table newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Table query()
