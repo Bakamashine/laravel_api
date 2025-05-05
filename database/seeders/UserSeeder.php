@@ -16,17 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table("role")->insert(
-        //     [
-        //         ["id" => 1, "role_name" => "Администратор",],
-        //         ["id" => 2, "role_name" => "Официант",],
-        //         ["id" => 3, "role_name" => "Повара",]
-        //     ]
-        // );
-
         User::create(["name" => "admin", "role_id" => 1, "login" => "admin@admin.ru", "password" => Hash::make("admin")]);
         User::create(['name' => "waiter", 'role_id' => 2, 'login' => 'waiter@waiter.ru', 'password' => Hash::make("waiter")]);
         User::create(['name' => 'user', 'role_id' => 3, 'login' => 'user@user.ru', 'password' => Hash::make('user')]);
-        // User::factory()->count(20)->create();
     }
 }

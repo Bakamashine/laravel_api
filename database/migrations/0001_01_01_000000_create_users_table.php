@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create("roles", function (Blueprint $blueprint) {
             $blueprint->id();
             $blueprint->string("role_name");
-            $blueprint->string("abilities")->nullable();
+            $blueprint->json("abilities");
         });
 
 
@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('patronymic')->nullable();
             $table->string('login')->unique();
             $table->string('photo_file')->nullable();
-            $table->foreignId("role_id")->default(3)->constrained("role")->cascadeOnDelete();
+            $table->foreignId("role_id")->default(3)->constrained("roles")->cascadeOnDelete();
             $table->string('status')->default('working');
             // $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();

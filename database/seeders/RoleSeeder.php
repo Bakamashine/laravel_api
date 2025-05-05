@@ -14,26 +14,19 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table("role")->insert(
-        //     [
-        //         ["id" => 1, "role_name" => "Администратор",],
-        //         ["id" => 2, "role_name" => "Официант",],
-        //         ["id" => 3, "role_name" => "Повара",]
-        //     ]
-        // );
 
-        Role::create([
+        Role::insert([
             [
                 "role_name" => "Администратор",
-                "abilities" => '[*]'
+                "abilities" => json_encode(['*'])
             ],
             [
                 "role_name" => "Официант",
-                "abilities" => '[*]'
+                "abilities" => json_encode(['*'])
             ],
             [
                 "role_name" => "Повара",
-                "abilities" => '[*]'
+                "abilities" => json_encode(['*'])
             ]
         ]);
     }
