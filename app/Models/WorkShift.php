@@ -40,4 +40,8 @@ class WorkShift extends Model
     public function workshiftuser() {
         return $this->hasMany(WorkShiftUser::class);
     }
+    
+    public function orders() {
+        return $this->morphMany(Order::class, "work_shift");
+    }
 }

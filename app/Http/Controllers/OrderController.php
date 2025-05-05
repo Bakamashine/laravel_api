@@ -55,6 +55,9 @@ class OrderController extends Controller
     public function getForId(Order $id)
     {
         if ($id->workshiftuser->user->id == auth('sanctum')->user()->id) {
+            if ($id->workshiftuser->workShift->active == "0") {
+                return $this->Forbidden("Forbidden. The shift must be active!");
+            }
             $res =  new OrderResource($id);
             return $res 
             ? $res

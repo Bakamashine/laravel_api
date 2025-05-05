@@ -56,4 +56,8 @@ class Order extends Model
     public function position() {
         return $this->hasMany(Position::class);
     }
+    
+    public function workshift() {
+        return $this->morphTo(WorkShift::class);
+    }
 }

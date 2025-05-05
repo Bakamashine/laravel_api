@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
                 Route::patch('work-shift/{id}/open', 'open');
                 Route::patch('work-shift/{id}/close', 'close');
                 Route::post('work-shift/{id}/user', 'addUser');
+                Route::get("work-shift/{id}/order", 'getAllForId');
             });
     });
 

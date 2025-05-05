@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\WorkShiftResource;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use App\Models\WorkShift;
@@ -145,5 +146,9 @@ class WorkShiftController extends Controller
             }
             return $this->ValidateError($e->validator->errors()->all());
         }
+    }
+    
+    public function getAllforId(WorkShift $id) {
+        return new WorkShiftResource($id);
     }
 }

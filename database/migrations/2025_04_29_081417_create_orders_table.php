@@ -21,7 +21,12 @@ return new class extends Migration {
                 ->constrained("tables")
                 ->cascadeOnDelete();
             $table->string("status")->default("Принят");
-            // $table->integer("price")->default(0);
+            // $table->foreignId("work_shift_id")
+            //     ->nullable()
+            //     ->constrained("work_shifts")
+            //     ->cascadeOnDelete();
+            
+            $table->morphs("work_shift");
         });
     }
 
