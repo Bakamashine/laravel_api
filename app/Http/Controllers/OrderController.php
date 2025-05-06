@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderResource;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Models\WorkShiftUser;
 use App\Models\Order;
@@ -30,9 +28,6 @@ class OrderController extends Controller
         if (!$record) {
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
-        
-        
-        
 
         $workshift = WorkShift::find($request->work_shift_id);
 

@@ -32,14 +32,6 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
     });
 
 // Официант
-// Route::middleware(['auth:sanctum'])
-// ->group(function () {
-//         Route::controller(OrderController::class)
-//         ->group(function () {
-//             Route::post("/order", '__invoke');
-//         });
-// });
-
 Route::controller(OrderController::class)
     ->group(function () {
         Route::post("/order", '__invoke');

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $start
  * @property string $end
  * @property int $active
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkShiftUser> $workshiftuser
  * @property-read int|null $workshiftuser_count
  * @method static \Database\Factories\WorkShiftFactory factory($count = null, $state = [])
