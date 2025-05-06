@@ -10,7 +10,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OrderRequest extends FormRequest
 {
-    
+
     use \App\ApiHelper {
         data as new_data;
     }
@@ -22,8 +22,9 @@ class OrderRequest extends FormRequest
     {
         return true;
     }
-    
-    public function data($data = null, $default = null) {
+
+    public function data($data = null, $default = null)
+    {
         return parent::data($data, $default);
     }
 
@@ -59,11 +60,15 @@ class OrderRequest extends FormRequest
             'table_id.exists' => "Такого столика не существует!"
         ];
     }
-    
+
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
-        if ($errors->has('work_shift_id') && $errors->first('work_shift_id') === "Forbidden. The shift must be active!") {
+        if (
+            $errors->has('work_shift_id')
+            &&
+            $errors->first('work_shift_id') === "Forbidden. The shift must be active!"
+        ) {
             throw new HttpResponseException(
                 $this->Forbidden(
                     $errors->first("work_shift_id")

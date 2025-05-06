@@ -148,6 +148,11 @@ class WorkShiftController extends Controller
         }
     }
     
+    /**
+     * Получение данных о смене по ID
+     * @param \App\Models\WorkShift $id
+     * @return WorkShiftResource
+     */
     public function getAllforId(WorkShift $id) {
         return new WorkShiftResource($id);
     }
