@@ -22,11 +22,19 @@ class RoleSeeder extends Seeder
             ],
             [
                 "role_name" => "Официант",
-                "abilities" => json_encode(['*'])
+                "abilities" => json_encode([
+                    'create_order',
+                    'get_order_with_id',
+                    'get_all_order_waiter',
+                    'update_status_waiter'
+                ])
             ],
             [
                 "role_name" => "Повар",
-                "abilities" => json_encode(['*'])
+                "abilities" => json_encode([
+                    'get_order_cook',
+                    'update_status_cook'
+                ])
             ]
         ]);
     }

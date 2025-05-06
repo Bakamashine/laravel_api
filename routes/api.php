@@ -32,15 +32,26 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
     });
 
 Route::controller(OrderController::class)
+    ->middleware(['auth:sanctum'])
     ->group(function () {
 
         // Официант
-        Route::post("order", '__invoke');
+        // Route::post("order", '__invoke');
 
-        Route::get("order/taken", 'get_All_With_Good_Status');
+        // Route::get("order/taken", 'get_All_With_Good_Status');
 
-        Route::get("order/{order}", 'getForId');
-        Route::patch("order/{order}/change-status", 'changeStatus');
+        // Route::get("order/{order}", 'getForId');
+        // Route::patch("order/{order}/change-status", 'changeStatus');
         
+
+        Route::middleware(['abilities:create_order,get_order_with_id,get_all_order_waiter,update_status_waiter'])
+        ->group(function () {
+            Route::post("order", '__invoke');
+            Route::get("order/{order}", 'getForId');
+            Route::patch("order/{order}/change-status", 'changeStatus');
+        });
+        
+        Route::get("order/taken", 'get_All_With_Good_Status')
+        ->middleware(['abilities:get_order_cook,update_status_cook']);
     });
 
