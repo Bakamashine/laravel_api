@@ -41,7 +41,6 @@ class UserController extends Controller
 
     protected $message = [
         'unique' => 'Такой логин уже существует!',
-        // 'string' => "Поле :attribute должно быть строкой",
         'password.min' => "Пароль должен быть минимум 8 символов",
         'password.confirmed' => "Пароли должны совпадать"
     ];

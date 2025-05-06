@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserRequest;
+use Exception;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\UserController;
@@ -14,29 +17,38 @@ class RegisterController extends UserController
 {
     /**
      * Регистрация посредством API
-     * @param \Illuminate\Http\Request $request
+     * @param RegisterRequest $request
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(RegisterRequest $request)
     {
+        $request->validated();
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'surname' => $request->surname,
+        //     'patronymic' => $request->patronymic,
+        //     'login' => $request->login,
+        //     'photo_file' => $request->photo_file,
+        //     'role_id' => $request->role_id,
+        //     'status' => $request->status,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        $user = User::create([
+            "name" => $request->name,
+            'login' => $request->login,
+            "password" => bcrypt($request->password),
+            "role_id" => 3
+        ]);
+
         try {
-            Validator::make($request->all(), $this->rules, $this->message)->validate();
-            /**
-             * @var User
-             */
-            $user = User::create([
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'patronymic' => $request->patronymic,
-                'login' => $request->login,
-                'photo_file' => $request->photo_file,
-                'role_id' => $request->role_id,
-                'status' => $request->status,
-                'password' => Hash::make($request->password),
+            return $this->isSuccess([
+                'user' => $user,
+                'token' => $user->createToken("user_token", json_decode($user->role->abilities))->plainTextToken
             ]);
-            return $this->isSuccess(['user' => $user, 'token' => $user->createToken("user_token", json_decode($user->role->abilities))->plainTextToken]);
-        } catch (ValidationException $e) {
-            return $this->ValidateError($e->validator->errors()->all());
+        } catch (Exception $exception) {
+            $user->delete();
+            return $this->Error($exception->getMessage());
         }
     }
 }
