@@ -18,7 +18,7 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
         Route::controller(AdminController::class)
             ->group(function () {
                 Route::get("/user", 'show');
-                Route::get("/user/{id}", 'detail');
+                Route::get("/user/{user}", 'detail');
                 Route::post("/user", 'CreateNewUser');
             });
         Route::controller(WorkShiftController::class)

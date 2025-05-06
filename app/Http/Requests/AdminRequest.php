@@ -2,16 +2,14 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UserRequest extends FormRequest
+class AdminRequest extends UserRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +22,11 @@ class UserRequest extends FormRequest
         return [
             "name" => 'required',
             'login' => 'required|unique:users,login',
-            'password' => 'required|string|min:8|confirmed'
-        ];
-    }
-    
-    public function messages() {
-        return  [
-            'unique' => 'Такой логин уже существует!',
-            'password.min' => "Пароль должен быть минимум 8 символов",
-            'password.confirmed' => "Пароли должны совпадать"
+            'password' => 'required|string|min:8',
+            'surname' => 'string|min:5',
+            'patronymic' => "string|min:5",
+            'photo_file' => "image|mimetypes:image/jpeg,image/png",
+            "role_id" => "required|numeric"
         ];
     }
 }

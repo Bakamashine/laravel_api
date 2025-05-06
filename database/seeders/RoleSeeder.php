@@ -25,7 +25,7 @@ class RoleSeeder extends Seeder
                 "abilities" => json_encode(['*'])
             ],
             [
-                "role_name" => "Повара",
+                "role_name" => "Повар",
                 "abilities" => json_encode(['*'])
             ]
         ]);

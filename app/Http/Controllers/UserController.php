@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\UserCollection;
+use App\Models\User;
+
 class UserController extends Controller
 {
-    use \App\UserTrait;
     use \App\ApiHelper;
 
     /**
@@ -16,37 +18,17 @@ class UserController extends Controller
     public function show()
     {
         return new UserCollection(Cache::remember("users", 60 * 60 * 24, function () {
-            return $this->all()->get();
+            return User::all();
         }));
     }
 
     /**
      * Вывод одного пользователя по id
-     * @param int $id
-     * @return UserCollection
+     * @param int $user
+     * @return UserResource
      */
-    public function detail($id)
+    public function detail(User $user)
     {
-        $users = $this->all()->where('users.id', '=', $id)->get();
-        return new UserCollection($users);
+        return new UserResource($user);
     }
-
-
-    protected $rules = [
-        "name" => 'required',
-        'login' => 'required|unique:users,login',
-        'password' => 'required|string|min:8|confirmed'
-    ];
-
-
-    protected $message = [
-        'unique' => 'Такой логин уже существует!',
-        'password.min' => "Пароль должен быть минимум 8 символов",
-        'password.confirmed' => "Пароли должны совпадать"
-    ];
-
-
-
-
-
 }
