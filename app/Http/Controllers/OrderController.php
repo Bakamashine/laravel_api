@@ -29,7 +29,7 @@ class OrderController extends Controller
         try {
             $record = WorkShiftuser::where('work_shift_id', $request->work_shift_id)
                 ->where('user_id', $user_id)->firstOrFail();
-            
+
 
             $workshift = WorkShift::find($request->work_shift_id);
 
@@ -81,7 +81,11 @@ class OrderController extends Controller
         ]);
 
 
-        if ($order->workshiftuser->user_id != auth('sanctum')->user()->id) {
+        if (
+            $order->workshiftuser->user_id != auth('sanctum')->user()->id
+            &&
+            auth('sanctum')->user()->role_id != 3
+        ) {
             return $this->Forbidden("Forbidden! You did not accept this order!");
         }
 
