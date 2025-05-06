@@ -23,18 +23,22 @@ class OrderController extends Controller
         $request->validated();
 
         $user_id = auth('sanctum')->id();
-        $record = WorkShiftUser::where("id", $request->work_shift_id)
+
+        $record = WorkShiftUser::find($request->work_shift_id)
             ->where("user_id", $user_id)
             ->first();
         if (!$record) {
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
         
-        $workshift = WorkShift::find($request->work_shift_id);
         
+        
+
+        $workshift = WorkShift::find($request->work_shift_id);
+
         $order = $workshift->orders()->create([
             'count' => $request->count,
-            'work_shift_user_id' => $user_id,
+            'work_shift_user_id' => $record->id,
             'table_id' => $request->table_id,
         ]);
 
@@ -42,7 +46,7 @@ class OrderController extends Controller
             return $this->data([
                 "id" => $order->id,
                 "table" => $order->table->name,
-                "shift_workers" => auth('sanctum')->user()->name,
+                "shift_workers" => $order->workshiftuser->user->name,
                 'created_at' => $order->created_at,
                 "status" => "Принят",
                 "price" => 0
@@ -57,14 +61,14 @@ class OrderController extends Controller
      */
     public function getForId(Order $id)
     {
-        if ($id->workshiftuser->user->id == auth('sanctum')->user()->id) {
+        if ($id->workshiftuser->user_id == auth('sanctum')->user()->id) {
             if ($id->workshiftuser->workShift->active == "0") {
                 return $this->Forbidden("Forbidden. The shift must be active!");
             }
-            $res =  new OrderResource($id);
-            return $res 
-            ? $res
-            : $this->NotFound();
+            $res = new OrderResource($id);
+            return $res
+                ? $res
+                : $this->NotFound();
         } else {
             return $this->Forbidden("Forbidden. You did not accept this order!");
         }
