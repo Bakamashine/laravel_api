@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderCollection;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\OrderRequest;
 use App\Models\WorkShiftUser;
@@ -90,5 +91,10 @@ class OrderController extends Controller
             "id" => $order->id,
             "status" => $request->status
         ], 200);
+    }
+    
+    public function get_All_With_Good_Status() {
+        $order = Order::where('status', "Принят")->orWhere("status", 'Готовится')->get();
+        return new OrderCollection($order);
     }
 }

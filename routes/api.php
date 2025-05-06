@@ -31,10 +31,16 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
             });
     });
 
-// Официант
 Route::controller(OrderController::class)
     ->group(function () {
+
+        // Официант
         Route::post("order", '__invoke');
+
+        Route::get("order/taken", 'get_All_With_Good_Status');
+
         Route::get("order/{order}", 'getForId');
         Route::patch("order/{order}/change-status", 'changeStatus');
+        
     });
+
