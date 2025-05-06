@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum', 'abilities:1'])
 // Официант
 Route::controller(OrderController::class)
     ->group(function () {
-        Route::post("/order", '__invoke');
-        Route::get("/order/{id}", 'getForId');
+        Route::post("order", '__invoke');
+        Route::get("order/{id}", 'getForId');
+        Route::patch("order/{id}/change-status", 'changeStatus');
     });

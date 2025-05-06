@@ -7,6 +7,8 @@ use App\Http\Requests\OrderRequest;
 use App\Models\WorkShiftUser;
 use App\Models\Order;
 use App\Models\WorkShift;
+use Illuminate\Http\Request;
+use Validator;
 
 class OrderController extends Controller
 {
@@ -67,5 +69,19 @@ class OrderController extends Controller
         } else {
             return $this->Forbidden("Forbidden. You did not accept this order!");
         }
+    }
+    
+    public function changeStatus(Request $request, Order $id) {
+        validator(
+            [$request->status],
+            ['status' => ['required', 'string']]
+            )->validate();
+        
+        $id->update(['status' => $request->status]);
+        $id->save();
+        return $this->data([
+            "id" => $id,
+            "status" => $request->status
+        ], 200);
     }
 }
