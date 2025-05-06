@@ -53,16 +53,16 @@ class OrderController extends Controller
 
     /**
      * Получение заказа по id
-     * @param \App\Models\Order $id
+     * @param \App\Models\Order $order
      * @return mixed|OrderResource|\Illuminate\Http\JsonResponse
      */
-    public function getForId(Order $id)
+    public function getForId(Order $order)
     {
-        if ($id->workshiftuser->user_id == auth('sanctum')->user()->id) {
-            if ($id->workshiftuser->workShift->active == "0") {
+        if ($order->workshiftuser->user_id == auth('sanctum')->user()->id) {
+            if ($order->workshiftuser->workShift->active == "0") {
                 return $this->Forbidden("Forbidden. The shift must be active!");
             }
-            $res = new OrderResource($id);
+            $res = new OrderResource($order);
             return $res
                 ? $res
                 : $this->NotFound();
@@ -71,16 +71,14 @@ class OrderController extends Controller
         }
     }
     
-    public function changeStatus(Request $request, Order $id) {
-        validator(
-            [$request->status],
-            ['status' => ['required', 'string']]
-            )->validate();
+    public function changeStatus(Request $request, Order $order) {
+        $request->validate([
+            "status" => ['required', 'string']
+        ]);
         
-        $id->update(['status' => $request->status]);
-        $id->save();
+        $order->update(['status' => $request->status]);
         return $this->data([
-            "id" => $id,
+            "id" => $order->id,
             "status" => $request->status
         ], 200);
     }
