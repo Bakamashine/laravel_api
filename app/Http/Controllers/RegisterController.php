@@ -23,17 +23,6 @@ class RegisterController extends UserController
     public function __invoke(RegisterRequest $request)
     {
         $request->validated();
-        // $user = User::create([
-        //     'name' => $request->name,
-        //     'surname' => $request->surname,
-        //     'patronymic' => $request->patronymic,
-        //     'login' => $request->login,
-        //     'photo_file' => $request->photo_file,
-        //     'role_id' => $request->role_id,
-        //     'status' => $request->status,
-        //     'password' => Hash::make($request->password),
-        // ]);
-
         $user = User::create([
             "name" => $request->name,
             'login' => $request->login,

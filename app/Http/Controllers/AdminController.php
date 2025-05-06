@@ -22,11 +22,6 @@ class AdminController extends UserController
         "role_id" => "required|numeric"
     ];
 
-    // #[\Override()]
-    // protected $message = array_merge(parent::$message, [
-    //     "image" => ":attribute должен быть картинкой и иметь расширения image/jpeg и image/png",        
-    // ]);
-
 
     public function CreateNewUser(Request $request)
     {

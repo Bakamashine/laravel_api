@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\UserCollection;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends UserController
