@@ -80,7 +80,8 @@ class OrderController extends Controller
         if ($order->workshiftuser->user_id != auth('sanctum')->user()->id) {
             return $this->Forbidden("Forbidden! You did not accept this order!");
         }
-        if ($order->work_shift()->get(['active']) == 0) {
+
+        if ($order->work_shift->active == 0) {
             return $this->Forbidden("You cannot change the order status of a closed shift!");
         }
         
