@@ -15,5 +15,6 @@ class WorkShiftUserSeeder extends Seeder
     {
         WorkShiftUser::create(['user_id' => 2, 'work_shift_id' => 1]);
         WorkShiftUser::create(['user_id' => 3, 'work_shift_id' => 1]);
+        WorkShiftUser::create(['user_id' => 1, 'work_shift_id' => 1]);
     }
 }
