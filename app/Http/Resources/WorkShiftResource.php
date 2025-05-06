@@ -19,8 +19,8 @@ class WorkShiftResource extends JsonResource
             "start" => $this->start,
             "end" => $this->end,
             "active" => $this->active,
-            "orders" => $this->orders(),
-            "amount_for_all" => $this->orders()->sum('price')
+            "orders" => $this->orders,
+            // "amount_for_all" => $this->orders->position->sum("price") | null
         ];
     }
 }
