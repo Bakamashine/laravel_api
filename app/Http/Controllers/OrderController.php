@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Models\WorkShiftUser;
 use App\Models\Order;
+use App\Models\WorkShift;
 
 class OrderController extends Controller
 {
@@ -22,17 +23,26 @@ class OrderController extends Controller
         $request->validated();
 
         $user_id = auth('sanctum')->id();
-        $record = WorkShiftuser::where("id", $request->work_shift_id)
+        $record = WorkShiftUser::where("id", $request->work_shift_id)
             ->where("user_id", $user_id)
             ->first();
         if (!$record) {
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
         
-        $order = Order::create([
+        // $order = Order::create([
+        //     'count' => $request->count,
+        //     'work_shift_user_id' => $user_id,
+        //     'table_id' => $request->table_id,
+        // ]);
+        
+        $workshift = WorkShift::find($request->work_shift_id);
+        
+        $order = $workshift->orders()->create([
             'count' => $request->count,
             'work_shift_user_id' => $user_id,
             'table_id' => $request->table_id,
+            // 'work_shift_id' => $request->work_shift_id
         ]);
 
         if ($order) {

@@ -38,7 +38,9 @@ class Order extends Model
         "count",
         "work_shift_user_id",
         "table_id",
-        "status"
+        "status",
+        // "work_shift_id",
+        // "work_shift_type",
     ];
 
     protected $hidden = [
@@ -57,7 +59,7 @@ class Order extends Model
         return $this->hasMany(Position::class);
     }
     
-    public function workshift() {
-        return $this->morphTo(WorkShift::class);
+    public function work_shift() {
+        return $this->morphTo();
     }
 }
