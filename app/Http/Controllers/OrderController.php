@@ -30,19 +30,12 @@ class OrderController extends Controller
             return $this->Forbidden("Forbidden. You don't work this shift!");
         }
         
-        // $order = Order::create([
-        //     'count' => $request->count,
-        //     'work_shift_user_id' => $user_id,
-        //     'table_id' => $request->table_id,
-        // ]);
-        
         $workshift = WorkShift::find($request->work_shift_id);
         
         $order = $workshift->orders()->create([
             'count' => $request->count,
             'work_shift_user_id' => $user_id,
             'table_id' => $request->table_id,
-            // 'work_shift_id' => $request->work_shift_id
         ]);
 
         if ($order) {
