@@ -33,7 +33,7 @@ class AuthController extends UserController
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         try {
             $user = auth('sanctum')->user();
