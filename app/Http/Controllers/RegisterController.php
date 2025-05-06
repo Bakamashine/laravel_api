@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\UserRequest;
 use Exception;
-use Illuminate\Http\Request;
-use Validator;
 use App\Http\Controllers\UserController;
 use App\Models\User;
-use Hash;
-use Illuminate\Validation\ValidationException;
 
 
 class RegisterController extends UserController
