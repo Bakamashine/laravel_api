@@ -36,7 +36,7 @@ class AuthController extends UserController
     public function logout(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = auth('sanctum')->user();
             if ($user) {
                 $user->currentAccessToken()->delete();
             } else {
